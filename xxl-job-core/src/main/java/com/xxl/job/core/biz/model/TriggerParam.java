@@ -5,11 +5,11 @@ import java.io.Serializable;
 /**
  * Created by xuxueli on 16/7/22.
  */
-public class TriggerParam implements Serializable{
+public class TriggerParam implements Serializable {
     private static final long serialVersionUID = 42L;
 
     private int jobId;
-
+    private String appName;
     private String executorHandler;
     private String executorParams;
     private String executorBlockStrategy;
@@ -25,13 +25,20 @@ public class TriggerParam implements Serializable{
     private int broadcastIndex;
     private int broadcastTotal;
 
-
     public int getJobId() {
         return jobId;
     }
 
     public void setJobId(int jobId) {
         this.jobId = jobId;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
     }
 
     public String getExecutorHandler() {
@@ -127,6 +134,7 @@ public class TriggerParam implements Serializable{
     public String toString() {
         return "TriggerParam{" +
                 "jobId=" + jobId +
+                ", appName=" + appName +
                 ", executorHandler='" + executorHandler + '\'' +
                 ", executorParams='" + executorParams + '\'' +
                 ", executorBlockStrategy='" + executorBlockStrategy + '\'' +

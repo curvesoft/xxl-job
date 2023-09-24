@@ -237,4 +237,14 @@
 		WHERE id = #{id}
 	</update>
 
+	<select id="findByAppNameAndHandler" parameterType="java.util.HashMap" resultMap="XxlJobInfo">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM xxl_job_info AS t, xxl_job_group as j
+		WHERE t.job_group = j.id
+		and t.executor_handler = #{executorHandler}
+		and j.app_name = #{appName}
+		ORDER BY t.id DESC
+	</select>
+
 </mapper>

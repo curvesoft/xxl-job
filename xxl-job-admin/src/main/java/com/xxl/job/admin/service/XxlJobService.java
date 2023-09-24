@@ -83,4 +83,12 @@ public interface XxlJobService {
 	 */
 	public ReturnT<Map<String,Object>> chartInfo(Date startDate, Date endDate);
 
+	/**
+	 * 根据appName找到jobGroup，然后根据jobGroup.id和handler找到job来获取
+	 *
+	 * @param appName
+	 * @param executorHandler
+	 * @return
+	 */
+	XxlJobInfo get(String appName, String executorHandler);
 }

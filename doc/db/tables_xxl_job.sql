@@ -2,8 +2,8 @@
 # XXL-JOB v2.4.1-SNAPSHOT
 # Copyright (c) 2015-present, xuxueli.
 
-CREATE database if NOT EXISTS `xxl_job` default character set utf8mb4 collate utf8mb4_unicode_ci;
-use `xxl_job`;
+CREATE database if NOT EXISTS `xxl-job` default character set utf8mb4 collate utf8mb4_unicode_ci;
+use `xxl-job`;
 
 SET NAMES utf8mb4;
 
@@ -119,4 +119,9 @@ INSERT INTO `xxl_job_user`(`id`, `username`, `password`, `role`, `permission`) V
 INSERT INTO `xxl_job_lock` ( `lock_name`) VALUES ( 'schedule_lock');
 
 commit;
+
+ALTER TABLE `xxl-job`.`xxl_job_log`
+    MODIFY COLUMN `executor_param` varchar(2048) CHARACTER SET utf8mb4 NULL DEFAULT NULL COMMENT '执行器任务参数' AFTER `executor_handler`;
+ALTER TABLE `xxl-job`.`xxl_job_info`
+    MODIFY COLUMN `executor_param` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '执行器任务参数' AFTER `executor_handler`;
 
