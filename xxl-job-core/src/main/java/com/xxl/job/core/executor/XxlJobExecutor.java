@@ -231,7 +231,7 @@ public class XxlJobExecutor {
     // ---------------------- job thread repository ----------------------
     private static ConcurrentMap<Integer, JobThread> jobThreadRepository = new ConcurrentHashMap<Integer, JobThread>();
 
-    private void initAdminBizList(String adminAddresses, String accessToken) throws Exception {
+    private void initAdminBizList(String adminAddresses, String accessToken, int timeout) throws Exception {
         if (adminAddresses != null && adminAddresses.trim().length() > 0) {
             for (String address : adminAddresses.trim().split(",")) {
                 if (address != null && address.trim().length() > 0) {
