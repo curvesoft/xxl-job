@@ -316,9 +316,13 @@ public class XxlJobServiceImpl implements XxlJobService {
         return ReturnT.SUCCESS;
     }
 
-    @Override
-    public ReturnT<String> start(int id) {
-        XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(id);
+	@Override
+	public ReturnT<String> start(int id) {
+		// load and valid
+		XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(id);
+		if (xxlJobInfo == null) {
+			return new ReturnT<String>(ReturnT.FAIL.getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+		}
 
         // valid
         ScheduleTypeEnum scheduleTypeEnum = ScheduleTypeEnum.match(xxlJobInfo.getScheduleType(), ScheduleTypeEnum.NONE);
@@ -348,13 +352,18 @@ public class XxlJobServiceImpl implements XxlJobService {
         return ReturnT.SUCCESS;
     }
 
-    @Override
-    public ReturnT<String> stop(int id) {
+	@Override
+	public ReturnT<String> stop(int id) {
+		// load and valid
         XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(id);
+		if (xxlJobInfo == null) {
+			return new ReturnT<String>(ReturnT.FAIL.getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+		}
 
-        xxlJobInfo.setTriggerStatus(0);
-        xxlJobInfo.setTriggerLastTime(0);
-        xxlJobInfo.setTriggerNextTime(0);
+		// stop
+		xxlJobInfo.setTriggerStatus(0);
+		xxlJobInfo.setTriggerLastTime(0);
+		xxlJobInfo.setTriggerNextTime(0);
 
         xxlJobInfo.setUpdateTime(new Date());
         xxlJobInfoDao.update(xxlJobInfo);
